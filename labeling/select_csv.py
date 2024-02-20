@@ -42,6 +42,6 @@ def main(csv_file, data_path, save_csv):
         first_row.to_csv(save_csv, mode="a", index=False, header=False)
 
 
-
-
-
+if __name__ == '__main__':
+    args = parse_args()
+    main(**args.__dict__)
