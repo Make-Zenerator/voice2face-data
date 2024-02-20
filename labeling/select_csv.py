@@ -37,9 +37,9 @@ def main(csv_file, data_path, save_csv):
         first_row = filtered_df.iloc[0:1]
         file_name = list_files_and_folders(os.path.join(data_path, youtube_id))[0]
         file_name_list = file_name.split("_")
-        first_row[4]=  file_name_list[0]
-        first_row[5]=  file_name_list[1]
-        first_row.to_csv(csv_file, mode="a", index=False, header=False)
+        first_row[4] =  file_name_list[0]
+        first_row[5] =  file_name_list[1]
+        first_row.to_csv(save_csv, mode="a", index=False, header=False)
 
 
 
