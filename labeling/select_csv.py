@@ -33,7 +33,7 @@ def main(csv_file, data_path, save_csv):
     youtube_ids = list_files_and_folders(data_path)
 
     for youtube_id in youtube_ids:
-        filtered_df = csv_data[csv_data[0].astype(Str).str.contains(youtube_id)]
+        filtered_df = csv_data[csv_data[0].astype(str).str.contains(youtube_id)]
         first_row = filtered_df.iloc[0:1]
         file_name = list_files_and_folders(os.path.join(data_path, youtube_id))[0]
         file_name_list = file_name.split("_")
@@ -41,7 +41,6 @@ def main(csv_file, data_path, save_csv):
         first_row[5]=  file_name_list[1]
         first_row.to_csv(csv_file, mode="a", index=False, header=False)
 
-        print(first_row)
 
 
 
