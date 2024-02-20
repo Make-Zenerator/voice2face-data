@@ -28,12 +28,12 @@ parser.add_argument('--image')
 
 args=parser.parse_args()
 
-faceProto="/weights/opencv_face_detector.pbtxt"
-faceModel="/weights/opencv_face_detector_uint8.pb"
-ageProto="/weights/age_deploy.prototxt"
-ageModel="/weights/age_net.caffemodel"
-genderProto="/weights/gender_deploy.prototxt"
-genderModel="/weights/gender_net.caffemodel"
+faceProto="weights/opencv_face_detector.pbtxt"
+faceModel="weights/opencv_face_detector_uint8.pb"
+ageProto="weights/age_deploy.prototxt"
+ageModel="weights/age_net.caffemodel"
+genderProto="weights/gender_deploy.prototxt"
+genderModel="weights/gender_net.caffemodel"
 
 MODEL_MEAN_VALUES=(78.4263377603, 87.7689143744, 114.895847746)
 ageList=['(0-2)', '(4-6)', '(8-12)', '(15-20)', '(25-32)', '(38-43)', '(48-53)', '(60-100)']
