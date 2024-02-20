@@ -2,11 +2,6 @@ import os
 import pandas as pd
 from argparse import ArgumentParser
 
-# CSV 파일 불러오기 
-csv_file = "output_test.csv"
-new_csv_file = "new_output.csv"
-data_path = "origin/video"
-
 def parse_args():
     parser = ArgumentParser()
 
