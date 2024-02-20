@@ -57,7 +57,11 @@ def save_frame(frame, output_folder, frame_count, folder_name, gender, age, cent
     subfolder_path = os.path.join(output_folder, folder_name)
     if not os.path.exists(subfolder_path):
         os.makedirs(subfolder_path)
-    cv2.imwrite(os.path.join(subfolder_path, f"{gender}_{age}_{center[0]}-{center[1]}.jpg"), frame)
+
+    height, width = frame.shape[:2]
+    height = round(center[0]/height,6)
+    width = round(center[1]/width,6)
+    cv2.imwrite(os.path.join(subfolder_path, f"{gender}_{age}_{height}_{width}.jpg"), frame)
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--folder', default='/Users/imseohyeon/Documents/gad/video')
