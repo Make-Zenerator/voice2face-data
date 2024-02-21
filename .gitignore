@@ -1,5 +1,8 @@
 #exclude model weights
-relabeling/weights
+labeling/weights
+
+#exclude test image
+labeling/frame
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

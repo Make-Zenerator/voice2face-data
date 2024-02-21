@@ -52,6 +52,8 @@ def save_frame(frame, output_folder, frame_count, folder_name, gender, age, cent
         age: Age range of the detected face.
         center: Center coordinates of the detected face bbox.
     '''
+    ageList_s = [0,4,8,15,25,38,48,60]
+    
     if not os.path.exists(output_folder):
         os.makedirs(output_folder)
     subfolder_path = os.path.join(output_folder, folder_name)
@@ -61,7 +63,7 @@ def save_frame(frame, output_folder, frame_count, folder_name, gender, age, cent
     height, width = frame.shape[:2]
     height = round(center[0]/height,6)
     width = round(center[1]/width,6)
-    cv2.imwrite(os.path.join(subfolder_path, f"{gender}_{age}_{height}_{width}.jpg"), frame)
+    cv2.imwrite(os.path.join(subfolder_path, f"{gender}_{ageList_s[age]}_{height}_{width}.jpg"), frame)
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--folder', default='/Users/imseohyeon/Documents/gad/video')
@@ -70,15 +72,16 @@ parser.add_argument('--capture_interval', type=int, default=50)  # Adjusted fram
 
 args = parser.parse_args()
 
-faceProto = "opencv_face_detector.pbtxt"
-faceModel = "opencv_face_detector_uint8.pb"
-ageProto = "age_deploy.prototxt"
-ageModel = "age_net.caffemodel"
-genderProto = "gender_deploy.prototxt"
-genderModel = "gender_net.caffemodel"
+faceProto = "weights/opencv_face_detector.pbtxt"
+faceModel = "weights/opencv_face_detector_uint8.pb"
+ageProto = "weights/age_deploy.prototxt"
+ageModel = "weights/age_net.caffemodel"
+genderProto = "weights/gender_deploy.prototxt"
+genderModel = "weights/gender_net.caffemodel"
 
 MODEL_MEAN_VALUES = (78.4263377603, 87.7689143744, 114.895847746)
 ageList = ['(0-2)', '(4-6)', '(8-12)', '(15-20)', '(25-32)', '(38-43)', '(48-53)', '(60-100)']
+
 genderList = ['Male', 'Female']
 
 faceNet = cv2.dnn.readNet(faceModel, faceProto)
@@ -106,6 +109,9 @@ for root, dirs, files in os.walk(args.folder):
             resultImg, faceInfo = highlightFace(faceNet, frame)
             if faceInfo:  # Process only if faces are detected
                 for faceData in faceInfo:
+                    if frame_count % args.capture_interval != 0:
+                        continue
+                    
                     bbox = faceData['bbox']
                     center = faceData['center']
                     width = faceData['width']
@@ -118,7 +124,7 @@ for root, dirs, files in os.walk(args.folder):
                     genderNet.setInput(blob)
                     genderPreds = genderNet.forward()
                     gender = genderList[genderPreds[0].argmax()]
-                    print(f'Gender: {gender}')
+                    # print(f'Gender: {gender}')
 
                     ageNet.setInput(blob)
                     agePreds = ageNet.forward()
@@ -129,12 +135,11 @@ for root, dirs, files in os.walk(args.folder):
                     # cv2.putText(resultImg, f'{gender}, {age}', (bbox[0], bbox[1] - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 255), 2, cv2.LINE_AA)
                     # cv2.putText(resultImg, f'Center: ({center[0]}, {center[1]})', (bbox[0], bbox[1] - 40), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 255), 2, cv2.LINE_AA)
                     # cv2.putText(resultImg, f'Box: ({bbox[0]}, {bbox[1]}, {width}, {height})', (bbox[0], bbox[1] - 70), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 255), 2, cv2.LINE_AA)
-                    
-                    cv2.imshow("Detecting age and gender", resultImg)
+                    save_frame(frame, args.output_folder, frame_count, folder_name, gender, age, center)
+                    # cv2.imshow("Detecting age and gender", resultImg)
                     
                     # Capture and save frames at specified intervals
-                    if frame_count % args.capture_interval == 0:
-                        save_frame(frame, args.output_folder, frame_count, folder_name, gender, age, center)
+                    
             
             frame_count += 1
             
