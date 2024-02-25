@@ -57,7 +57,11 @@ def save_frame(frame, output_folder, frame_count, folder_name, gender, age, cent
     subfolder_path = os.path.join(output_folder, folder_name)
     if not os.path.exists(subfolder_path):
         os.makedirs(subfolder_path)
-    cv2.imwrite(os.path.join(subfolder_path, f"{gender}_{age}_{center[0]}-{center[1]}.jpg"), frame)
+
+    height, width = frame.shape[:2]
+    height = round(center[0]/height,6)
+    width = round(center[1]/width,6)
+    cv2.imwrite(os.path.join(subfolder_path, f"{gender}_{age}_{height}_{width}.jpg"), frame)
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--folder', default='/Users/imseohyeon/Documents/gad/video')
@@ -118,12 +122,13 @@ for root, dirs, files in os.walk(args.folder):
 
                     ageNet.setInput(blob)
                     agePreds = ageNet.forward()
-                    age = ageList[agePreds[0].argmax()]
-                    print(f'Age: {age[1:-1]} years')
+                    age = agePreds[0].argmax()
+                    # age = ageList[agePreds[0].argmax()]
+                    # print(f'Age: {age[1:-1]} years')
 
-                    cv2.putText(resultImg, f'{gender}, {age}', (bbox[0], bbox[1] - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 255), 2, cv2.LINE_AA)
-                    cv2.putText(resultImg, f'Center: ({center[0]}, {center[1]})', (bbox[0], bbox[1] - 40), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 255), 2, cv2.LINE_AA)
-                    cv2.putText(resultImg, f'Box: ({bbox[0]}, {bbox[1]}, {width}, {height})', (bbox[0], bbox[1] - 70), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 255), 2, cv2.LINE_AA)
+                    # cv2.putText(resultImg, f'{gender}, {age}', (bbox[0], bbox[1] - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 255), 2, cv2.LINE_AA)
+                    # cv2.putText(resultImg, f'Center: ({center[0]}, {center[1]})', (bbox[0], bbox[1] - 40), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 255), 2, cv2.LINE_AA)
+                    # cv2.putText(resultImg, f'Box: ({bbox[0]}, {bbox[1]}, {width}, {height})', (bbox[0], bbox[1] - 70), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 255), 2, cv2.LINE_AA)
                     
                     cv2.imshow("Detecting age and gender", resultImg)
                     
