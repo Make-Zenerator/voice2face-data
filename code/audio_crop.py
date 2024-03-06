@@ -4,13 +4,32 @@ import soundfile as sf
 import matplotlib.pyplot as plt
 from pydub import AudioSegment
 
+'''
+Extracts human voice segments from an audio file and creates a new audio file with the detected voice segments 
+within a 10-second duration.
+
+Args:
+    audio_file (str): Path to the input audio file. If the file format is .m4a, it will be converted to .wav.
+    
+Returns:
+    save_file (str): Path to the saved audio file with detected voice segments.
+'''
+
 def detect_human_voice(audio_file):
-    # Function to detect human voice segments in an audio file
+    '''
+    Detects human voice segments in an audio file.
+
+    Args:
+        audio_file (str): Path to the input audio file.
+
+    Returns:
+        voice_indices (list): List containing indices of the detected voice segments.
+    '''
     # Read the audio file
     y, sr = librosa.load(audio_file, sr=None)
 
     # Detect voice activity
-    # ----- Need to Modify thershold-----#
+    # ----- Need to Modify threshold-----#
     voice_segments = librosa.effects.split(y, top_db=18)
 
     # Generate indices of voice segments
@@ -21,7 +40,13 @@ def detect_human_voice(audio_file):
     return voice_indices
 
 def save_full_audio_with_detected_voice(audio_file, save_file):
-    # Function to save the full audio file with detected voice segments
+    '''
+    Saves the full audio file with detected voice segments.
+
+    Args:
+        audio_file (str): Path to the input audio file.
+        save_file (str): Path to save the audio file with detected voice segments.
+    '''
     # Read the entire audio file
     y, sr = librosa.load(audio_file, sr=None)
 
