@@ -84,6 +84,7 @@ def find_wav(wav_folder: str, json_folder: str, save_folder: str):
 
                 if json_file:
                     process_wav_and_json(wav_file, json_file, wav_file_name, save_folder)
+                    os.remove(wav_file)
 
 
 def main(wav_folder: str, json_folder: str, save_folder: str):
@@ -99,6 +100,6 @@ if __name__ == '__main__':
     # JSON 파일이 들어있는 폴더 경로 
     json_folder = '/home/carbox/Desktop/data/009.립리딩(입모양) 음성인식 데이터/01.데이터/2.Validation/라벨링데이터'  
     # 원천데이터를 저장할 폴더 경로
-    save_folder = '.' 
-    
+    save_folder = '/home/carbox' 
+
     main(wav_folder, json_folder, save_folder)
