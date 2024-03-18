@@ -48,8 +48,9 @@ def process_wav_and_json(wav_file: str, json_file: str, wav_file_name: str, save
         print(f"Saved {output_wav_path}")
         
 
-def find_matching_json(file_name: str, json_folder: str):
-    """_summary_
+def find_matching_json(file_name: str, json_folder: str) ->str :
+    """wav 파일과 파일명이 똑같은 json 파일을 찾아 경로 반환, 
+    만약 없다면 None 반환
 
     Args:
         file_name (str): wav 파일 이름 가져오기
@@ -67,7 +68,8 @@ def find_matching_json(file_name: str, json_folder: str):
     return None
             
 def find_wav(wav_folder: str, json_folder: str, save_folder: str):
-    """_summary_
+    """ 처음 정제할 wav 파일 찾기
+        이후 json 파일을 찾아 wav를 정제한다.
 
     Args:
         wav_folder (str): wav 파일들이 저장된 폴더 위치 
