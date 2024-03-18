@@ -23,18 +23,33 @@ def list_files_and_folders(data_path):
         return None
 
 def main(csv_file, data_path, save_csv):
+    ageList_s = [0,4,8,15,25,38,48,60]
 
     csv_data = pd.read_csv(csv_file, header=None)
     youtube_ids = list_files_and_folders(data_path)
-
+    count = 0
     for youtube_id in youtube_ids:
         filtered_df = csv_data[csv_data[0].astype(str).str.contains(youtube_id)]
         first_row = filtered_df.iloc[0:1]
-        file_name = list_files_and_folders(os.path.join(data_path, youtube_id))[0]
-        file_name_list = file_name.split("_")
-        first_row[4] =  file_name_list[0]
-        first_row[5] =  file_name_list[1]
-        first_row.to_csv(save_csv, mode="a", index=False, header=False)
+        file_name = list_files_and_folders(os.path.join(data_path, youtube_id))
+        for i in file_name:
+            file_name_list = i.split("_")
+            if file_name_list[-1] =="Store":
+                continue
+            else:
+                print(youtube_id, file_name_list)
+
+                first_row[4] =  file_name_list[0]
+                
+            first_row[5] =  ageList_s.index(int(file_name_list[1]))
+
+            first_row.to_csv(save_csv, mode="a", index=False, header=False)
+
+        
+        count += 1
+        
+
+    print(count)
 
 
 if __name__ == '__main__':
