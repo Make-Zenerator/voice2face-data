@@ -39,7 +39,7 @@ def highlightFace(net, frame, conf_threshold=0.7):
             cv2.rectangle(frameOpencvDnn, (x1, y1), (x2, y2), (0, 255, 0), int(round(frameHeight / 150)), 8)
     return frameOpencvDnn, faceInfo
 
-def save_frame(frame, output_folder, frame_count, folder_name, gender, age, center):
+def save_frame(frame, output_folder, folder_name, gender, age, center):
     '''
     Function to save a frame with a specific filename format.
     
@@ -52,8 +52,9 @@ def save_frame(frame, output_folder, frame_count, folder_name, gender, age, cent
         age: Age range of the detected face.
         center: Center coordinates of the detected face bbox.
     '''
-    ageList_s = [0,4,8,15,25,38,48,60]
-    
+
+    age_List_s = [0,4,8,15,25,38,48,60]
+
     if not os.path.exists(output_folder):
         os.makedirs(output_folder)
     subfolder_path = os.path.join(output_folder, folder_name)
@@ -63,10 +64,12 @@ def save_frame(frame, output_folder, frame_count, folder_name, gender, age, cent
     height, width = frame.shape[:2]
     height = round(center[0]/height,6)
     width = round(center[1]/width,6)
-    cv2.imwrite(os.path.join(subfolder_path, f"{gender}_{ageList_s[age]}_{height}_{width}.jpg"), frame)
+    cv2.imwrite(os.path.join(subfolder_path, f"{gender}_{age_List_s[age]}_{height}_{width}.jpg"), frame)
+
+    print("save: ",os.path.join(subfolder_path, f"{gender}_{age_List_s[age]}_{height}_{width}.jpg"))
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--folder', default='/Users/imseohyeon/Documents/gad/video')
+parser.add_argument('--folder', default='/home/carbox/Desktop/git/dataset/video')
 parser.add_argument('--output_folder', default='frame')
 parser.add_argument('--capture_interval', type=int, default=50)  # Adjusted frame interval for capturing
 
@@ -81,7 +84,6 @@ genderModel = "weights/gender_net.caffemodel"
 
 MODEL_MEAN_VALUES = (78.4263377603, 87.7689143744, 114.895847746)
 ageList = ['(0-2)', '(4-6)', '(8-12)', '(15-20)', '(25-32)', '(38-43)', '(48-53)', '(60-100)']
-
 genderList = ['Male', 'Female']
 
 faceNet = cv2.dnn.readNet(faceModel, faceProto)
@@ -97,21 +99,25 @@ for root, dirs, files in os.walk(args.folder):
                 break
         else:
             continue
-        
+
         video = cv2.VideoCapture(video_path)
         padding = 20
         frame_count = 0
+        count = 0
         while True:  # Infinite loop for processing each frame
             hasFrame, frame = video.read()
             if not hasFrame:
+                break
+            if frame_count % args.capture_interval != 0:
+                frame_count +=1
+                continue
+
+            if count > 4: 
                 break
 
             resultImg, faceInfo = highlightFace(faceNet, frame)
             if faceInfo:  # Process only if faces are detected
                 for faceData in faceInfo:
-                    if frame_count % args.capture_interval != 0:
-                        continue
-                    
                     bbox = faceData['bbox']
                     center = faceData['center']
                     width = faceData['width']
@@ -124,28 +130,23 @@ for root, dirs, files in os.walk(args.folder):
                     genderNet.setInput(blob)
                     genderPreds = genderNet.forward()
                     gender = genderList[genderPreds[0].argmax()]
-                    # print(f'Gender: {gender}')
 
                     ageNet.setInput(blob)
                     agePreds = ageNet.forward()
                     age = agePreds[0].argmax()
                     # age = ageList[agePreds[0].argmax()]
-                    # print(f'Age: {age[1:-1]} years')
 
                     # cv2.putText(resultImg, f'{gender}, {age}', (bbox[0], bbox[1] - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 255), 2, cv2.LINE_AA)
                     # cv2.putText(resultImg, f'Center: ({center[0]}, {center[1]})', (bbox[0], bbox[1] - 40), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 255), 2, cv2.LINE_AA)
                     # cv2.putText(resultImg, f'Box: ({bbox[0]}, {bbox[1]}, {width}, {height})', (bbox[0], bbox[1] - 70), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0, 255, 255), 2, cv2.LINE_AA)
-                    save_frame(frame, args.output_folder, frame_count, folder_name, gender, age, center)
-                    # cv2.imshow("Detecting age and gender", resultImg)
                     
                     # Capture and save frames at specified intervals
-                    
+                    save_frame(frame, args.output_folder, folder_name, gender, age, center)
+                    count +=1
+                        
             
             frame_count += 1
             
-            # Press 'q' to exit
-            if cv2.waitKey(1) & 0xFF == ord('q'):
-                break
         
         video.release()
         cv2.destroyAllWindows()
