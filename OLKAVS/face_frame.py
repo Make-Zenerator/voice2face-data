@@ -2,7 +2,13 @@ import cv2
 import os
 from rembg import remove
 
-def process_video(video_path, save_folder):
+def process_video(video_path: str, save_folder: str):
+    """Video 에서 사람의 얼굴이 정면이고, 눈을 뜨고 잇을 때 캡쳐 및 배경 제거
+
+    Args:
+        video_path (str): 타겟 비디오 파일경로
+        save_folder (str): 이미지를 저장할 위치 
+    """
     face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_alt2.xml')
     eye_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_eye_tree_eyeglasses.xml')
 
@@ -48,9 +54,15 @@ def process_video(video_path, save_folder):
     cap.release()
 
 
-def main(video_path, save_folder):
+def main(video_folder: str, save_folder: str):
+    """ 비디오 폴더 경로에서 .mp4 파일 선택,
+        정제 이후 파일 제거
 
-    for root,_,files in os.walk(video_path):
+    Args:
+        video_folder (str): 탐색할 비디오가 있는 경로
+        save_folder (str): 이미지 저장을 위한 파일
+    """
+    for root,_,files in os.walk(video_folder):
         for file in files:
             if file.endswith('.mp4'):
                 video_file = os.path.join(root, file)
