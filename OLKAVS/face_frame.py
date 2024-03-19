@@ -37,8 +37,10 @@ def process_video(video_path, save_folder):
                 face_img = remove(face_img, bgcolor=(255, 255, 255, 255))
 
                 video_name = "_".join(os.path.splitext(os.path.basename(video_path))[0].split("_")[:-2])
-                video_name = os.path.join(save_folder,video_name)
-                cv2.imwrite(f'{video_name}.png', face_img)
+                origin_file_folder = os.path.join(save_folder,'data', video_name)
+                os.makedirs(origin_file_folder, exist_ok=True)
+
+                cv2.imwrite(f'{os.path.join(origin_file_folder, video_name)}.png', face_img)
                 cap.release()
                 return 
             
@@ -47,12 +49,18 @@ def process_video(video_path, save_folder):
 
 
 def main(video_path, save_folder):
-    process_video(video_path, save_folder)
-    os.remove(video_path)
+
+    for root,_,files in os.walk(video_path):
+        for file in files:
+            if file.endswith('.mp4'):
+                video_file = os.path.join(root, file)
+                process_video(video_file, save_folder)
+                os.remove(os.path.join(root,file))
 
     
-# Replace 'path_to_your_video.mp4' with your video's file path
-process_video('/home/carbox/Desktop/data/009.립리딩(입모양) 음성인식 데이터/01.데이터/2.Validation/원천데이터/VS28/소음환경5/E(전문가)/M(남성)/M(남성)_1/lip_K_5_M_03_E255_A_001.mp4')
-save_folder = "."
+if __name__ == '__main__':
+    video_folder = '/home/carbox/Desktop/data/009.립리딩(입모양) 음성인식 데이터/01.데이터/2.Validation/원천데이터'
+    save_folder = "/home/carbox"
+    main(video_folder, save_folder)
 
 
