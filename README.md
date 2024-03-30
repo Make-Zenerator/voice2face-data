@@ -12,7 +12,7 @@
 ## Project Structure
 
 ```
-data
+code
 ┣ audio
 ┃ ┣ audio_check_dB.py
 ┃ ┣ audio_dB_crop.py
@@ -33,11 +33,14 @@ data
 ┣ total
 ┃ ┣ total_audio_video_image.py
 ┃ ┗ total_origin_remove.py
-┣ video
-┃ ┣ video_clipimage.py
-┃ ┗ video_download.py
-┣ README.md
+┗ video
+  ┣ video_clipimage.py
+  ┗ video_download.py
+┗ README.md
 ┗ requirements.txt
+┗ airflow_docker 
+┗ Dockerfile
+...
 ```
 ## Usage
 
@@ -138,4 +141,4 @@ pip install -r requirements.txt
   
   
 ## Links
-- [BoostCamp github](https://github.com/boostcampaitech6/level2-3-cv-finalproject-cv-08)
+- [Naver BoostCamp 6th github](https://github.com/boostcampaitech6/level2-3-cv-finalproject-cv-08)
