@@ -1,6 +1,14 @@
 import cv2
 import os
 from rembg import remove
+from argparse import ArgumentParser
+
+def parse_args():
+    parser = ArgumentParser()
+    parser.add_argument('--origin-folder', default=os.environ.get('DATA_ORIGIN_PATH', '/home/carbox/Desktop/data/009.립리딩(입모양) 음성인식 데이터/01.데이터/2.Validation/원천데이터'), help='Path to the folder containing videos')
+    parser.add_argument('--save-folder', default=os.environ.get('DATA_SAVE_PATH', '/home/carbox'), help='Path to save the processed images')
+    return parser.parse_args()
+
 
 def process_video(video_path: str, save_folder: str):
     """Video 에서 사람의 얼굴이 정면이고, 눈을 뜨고 잇을 때 캡쳐 및 배경 제거
@@ -71,8 +79,7 @@ def main(video_folder: str, save_folder: str):
 
     
 if __name__ == '__main__':
-    video_folder = '/home/carbox/Desktop/data/009.립리딩(입모양) 음성인식 데이터/01.데이터/2.Validation/원천데이터'
-    save_folder = "/home/carbox"
-    main(video_folder, save_folder)
+    args = parse_args()
+    main(args.origin_folder, args.save_folder)
 
 

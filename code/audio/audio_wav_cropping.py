@@ -1,6 +1,15 @@
 import os 
 import json
 from pydub import AudioSegment
+from argparse import ArgumentParser
+
+def parse_args():
+    parser = ArgumentParser()
+    parser.add_argument('--origin-folder', default=os.environ.get('DATA_ORIGIN_PATH', '/home/carbox/Desktop/data/009.립리딩(입모양) 음성인식 데이터/01.데이터/2.Validation/원천데이터'), help='Path to the folder containing wavs')
+    parser.add_argument('--json-folder', default=os.environ.get('DATA_JSON_PATH', '/home/carbox/Desktop/data/009.립리딩(입모양) 음성인식 데이터/01.데이터/2.Validation/라벨링데이터'), help='Path to the folder containing labeling jsons')
+    parser.add_argument('--save-folder', default=os.environ.get('DATA_SAVE_PATH', '/home/carbox'), help='Path to save the processed images')
+    return parser.parse_args()
+
 
 def process_wav_and_json(wav_file: str, json_file: str, wav_file_name: str, save_folder: str):
     """ wav 파일을 받아 json 에서 필요한 부분을 잘라내 형태에 맞게 저장할 코드
@@ -97,11 +106,5 @@ def main(wav_folder: str, json_folder: str, save_folder: str):
 
 
 if __name__ == '__main__':
-    # WAV 파일이 들어있는 폴더 경로
-    wav_folder = '/home/carbox/Desktop/data/009.립리딩(입모양) 음성인식 데이터/01.데이터/2.Validation/원천데이터'   
-    # JSON 파일이 들어있는 폴더 경로 
-    json_folder = '/home/carbox/Desktop/data/009.립리딩(입모양) 음성인식 데이터/01.데이터/2.Validation/라벨링데이터'  
-    # 원천데이터를 저장할 폴더 경로
-    save_folder = '/home/carbox' 
-
-    main(wav_folder, json_folder, save_folder)
+    args = parse_args()
+    main(args.origin_folder,args.json_folder, args.save_folder)

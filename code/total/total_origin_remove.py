@@ -1,6 +1,12 @@
 import os
 import re
 import tarfile
+from argparse import ArgumentParser
+
+def parse_args():
+    parser = ArgumentParser()
+    parser.add_argument('--origin-folder', default=os.environ.get('DATA_ORIGIN_PATH', '/home/carbox/Desktop/data/009.립리딩(입모양) 음성인식 데이터/01.데이터/2.Validation/원천데이터'), help='Path to the folder containing videos')
+    return parser.parse_args()
 
 def extract_tar_if_needed(root_folder: str):
     """ tar 파일을 추출하는 함수
@@ -54,7 +60,7 @@ def main(root_folder: str, keep_extensions: list, pattern: str):
     print("End of processing")
 
 if __name__ == '__main__':
-    root_folder = '~/Desktop/GPU/009.립리딩(입모양) 음성인식 데이터/01.데이터/2.Validation/원천데이터'  # 탐색을 시작할 폴더 경로
+    args = parse_args()
     keep_extensions = ['A_001.mp4', '.wav']  # 유지하고 싶은 파일 확장자 목록
     pattern = r'.*_A_.*\.json'
-    main(root_folder, keep_extensions, pattern)
+    main(args.origin_folder, keep_extensions, pattern)
