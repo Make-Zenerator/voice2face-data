@@ -7,6 +7,19 @@ import multiprocessing
 import threading
 
 def extract_save_mfcc(audio_path, output_image_path, n_mfcc=13):
+    """
+    음성 데이터셋을 통해 MFCC를 추출하고, 해당 이미지 저장할 코드
+
+    Args:
+        audio_path (str): Mel spectrogram으로 변환할 음성 데이터 경로
+        output_image_path (str): 변환된 결과 이미지를 저장할 경로
+        n_mfcc (int, optional): 생성할 MFCC 개수. Defaults to 13.
+
+    Raises:
+        Exception: 파일을 처리하는 도중 오류가 발생할 경우 예외 발생
+    """    
+
+    
     try:
         # 오디오 파일 로드
         rate, signal = wav.read(audio_path)
