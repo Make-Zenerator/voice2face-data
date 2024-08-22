@@ -25,6 +25,11 @@ code
 ┃ ┣ crawling_select_csv.py
 ┃ ┣ crawling_urlsave.py
 ┃ ┗ crawling_videosave.py
+┣ EDA
+┃ ┣ EDA_deepfake.ipynb
+┃ ┣ EDA_HQvoxceleb.ipynb
+┃ ┣ EDA_OLKAVS.ipynb
+┃ ┗ EDA_survey.ipynb
 ┣ image
 ┃ ┣ image_clipseg2.py
 ┃ ┗ image_face_frame.py
@@ -65,6 +70,12 @@ code
  - `crawling_select_csv.py`: 주어진 CSV 파일에서 YouTube ID를 찾아 해당하는 파일 이름에서 정보를 추출하고, 이 정보를 새로운 CSV 파일에 저장하는 간단한 데이터 처리 작업을 수행하는 스크립트입니다.
  - `crawling_urlsave.py`: Selenium을 사용하여 YouTube 크롤링을 수행하여 약 162개의 비디오에 대한 이름, 제목 및 URL 정보를 Youtube_search_df.csv에 저장하는 스크립트입니다.
  - `crawling_videosave.py`: '`crawling_urlsave.py`'를 통해 얻은 URL에서 비디오를 다운로드하는 스크립트입니다. 비디오는 'download' 폴더에 저장됩니다.
+
+#### EDA 
+ - `EDA_deepfake.ipynb`: '딥페이크 변조 영상' 데이터셋 metadata를 통한 EDA 스크립트입니다.
+ - `EDA_HQvoxceleb.ipynb`: 'HQ-Voxceleb' 데이터셋 metadata를 통한 EDA 스크립트입니다.
+ - `EDA_OLKAVS.ipynb`: 'OLKAVS' 데이터셋 metadata, voice를 통한 EDA 스크립트입니다.
+ - `EDA_survey.ipynb`: 서비스 이용자를 대상으로 진행한 설문조사 EDA 스크립트입니다.
 
 #### image
 
