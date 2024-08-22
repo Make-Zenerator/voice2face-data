@@ -27,10 +27,10 @@ code
 ┃ ┗ crawling_videosave.py
 ┣ image
 ┃ ┣ image_clipseg2.py
-┃ ┣ image_face_frame.py
-┃ ┗ image_olkvs_gender_csv.py
-┣ image
-┃ ┗ OLKAVS_file_tree_csv.py
+┃ ┗ image_face_frame.py
+┣ preprocess
+┃ ┣ preprocess_file_tree_csv.py
+┃ ┗ preprocess_image_gender_csv.py
 ┣ relabel
 ┃ ┣ relabel_detect_getframe.py
 ┃ ┣ relabel_select_csv.py
@@ -70,10 +70,11 @@ code
 
  - `image_clipseg2.py`: CLIPSeg 모델을 사용하여 텍스트 프롬프트를 기반으로 이미지 세분화를 수행하는 스크립트입니다. 이미지를 불러와 텍스트 프롬프트로 처리하고, 식별된 객체를 기반으로 세분화된 이미지를 생성합니다.
  - `image_face_frame.py`: 비디오에서 사람의 얼굴이 정면이고, 눈을 뜨고 있을 때 캡쳐하고 배경을 제거하는 스크립트입니다.
- - `image_olkvs_gender_csv.py`: 이미지 경로와 성멸 데이터를 변환해 저장하는 스크립트입니다.
+
 
 #### preprocess
-- `OLKAVS_file_tree_csv.py`: OLKAVS 데이터셋 전체를 학습(train), 검증(validation), 테스트(test) 3가지로 나눈 후, 각 데이터셋의 정보를 CSV 파일로 저장하는 스크립트입니다.
+ - `preprocess_file_tree_csv.py`: OLKAVS 데이터셋 전체를 학습(train), 검증(validation), 테스트(test) 3가지로 나눈 후, 각 데이터셋의 정보를 CSV 파일로 저장하는 스크립트입니다.
+ - `preprocess_image_gender_csv.py`: 이미지 경로와 성별 데이터를 매칭해 csv 파일로 저장하는 스크립트입니다.
 
 #### relabel
 
