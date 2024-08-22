@@ -15,7 +15,9 @@
 code
 ┣ audio
 ┃ ┣ audio_check_dB.py
-┃ ┣ audio_dB_crop.py
+┃ ┣ audio_crop.py
+┃ ┣ audio_remove_noise.py
+┃ ┣ audio_to_mfcc.py
 ┃ ┗ audio_wav_cropping.py
 ┣ crawling
 ┃ ┣ crawling_detect.py
@@ -25,7 +27,10 @@ code
 ┃ ┗ crawling_videosave.py
 ┣ image
 ┃ ┣ image_clipseg2.py
-┃ ┗ image_face_frame.py
+┃ ┣ image_face_frame.py
+┃ ┗ image_olkvs_gender_csv.py
+┣ image
+┃ ┗ OLKAVS_file_tree_csv.py
 ┣ relabel
 ┃ ┣ relabel_detect_getframe.py
 ┃ ┣ relabel_select_csv.py
@@ -49,6 +54,8 @@ code
 #### audio
  - `audio_check_dB.py`: 특정 dB 값을 확인하여 사람의 음성 여부를 판별하는 스크립트입니다.
  - `audio_dB_crop.py`: 오디오 파일에서 인간의 목소리 세그먼트를 추출하고 감지된 음성 세그먼트를 포함하는 새로운 오디오 파일을 10초로 자르는 스크립트입니다.
+ - `audio_remove_noise.py`: 오디오 파일에서 음성을 분리한 후 노이즈를 줄이고 증폭하하는 스크립트 입니다.
+ - `audio_to_mfcc.py`: 오디오 파일을 MFCC 이미지로 변환하여 저장하는 스크립트 입니다.
  - `audio_wav_cropping.py`: JSON POINT에 맞춰 오디오를 자르는 스크립트입니다.
 
 #### crawling
@@ -63,6 +70,10 @@ code
 
  - `image_clipseg2.py`: CLIPSeg 모델을 사용하여 텍스트 프롬프트를 기반으로 이미지 세분화를 수행하는 스크립트입니다. 이미지를 불러와 텍스트 프롬프트로 처리하고, 식별된 객체를 기반으로 세분화된 이미지를 생성합니다.
  - `image_face_frame.py`: 비디오에서 사람의 얼굴이 정면이고, 눈을 뜨고 있을 때 캡쳐하고 배경을 제거하는 스크립트입니다.
+ - `image_olkvs_gender_csv.py`: 이미지 경로와 성멸 데이터를 변환해 저장하는 스크립트입니다.
+
+#### preprocess
+- `OLKAVS_file_tree_csv.py`: OLKAVS 데이터셋 전체를 학습(train), 검증(validation), 테스트(test) 3가지로 나눈 후, 각 데이터셋의 정보를 CSV 파일로 저장하는 스크립트입니다.
 
 #### relabel
 
