@@ -38,6 +38,7 @@ code
 ┃ ┗ preprocess_image_gender_csv.py
 ┣ relabel
 ┃ ┣ relabel_detect_getframe.py
+┃ ┣ relabel_OLKAVS_json2csv.py
 ┃ ┣ relabel_select_csv.py
 ┃ ┗ relabel_Vox_age.py
 ┣ total
@@ -89,13 +90,14 @@ code
 
 #### relabel
 
- - `relabel_detect_getframe.py`: 주어진 비디오에서 얼굴을 감지하고, 감지된 얼굴에 대해 성별과 연령을 추정하여 화면에 표시하고, 일정한 간격으로 프레임을 캡처하여 이미지 파일로 저장하는 기능을 수행합니다.
+ - `relabel_detect_getframe.py`: 주어진 비디오에서 얼굴을 감지하고, 감지된 얼굴에 대해 성별과 연령을 추정하여 화면에 표시하고, 일정한 간격으로 프레임을 캡처하여 이미지 파일로 저장하는 스크립트입니다.
+ - `relable_OLKAVS_json2csv.py`: OLKAVS 데이터셋을 EDA 하기 위해 Json 형태로 저장된 여러개의 Metadata File을 1개의 csv 파일 형태로 축약해 저장하는 스크립트입니다.
  - `relabel_select_csv.py`: 데이터 경로에서 YouTube ID를 추출하고, 파일 이름에서 필요한 정보를 추출하여 새로운 CSV 파일에 저장하는 스크립트입니다.
- - `relabel_Vox_age.py`: 이미지 폴더에서 이미지들을 읽어와 각 이미지의 나이를 예측하고, 가장 흔한 나이 그룹을 세서 출력하고, 그 결과를 CSV 파일에 저장하는 작업을 수행합니다.
+ - `relabel_Vox_age.py`: 이미지 폴더에서 이미지들을 읽어와 각 이미지의 나이를 예측하고, 가장 흔한 나이 그룹을 세서 출력하고, 그 결과를 CSV 파일에 저장하는 스크립트입니다.
 
 #### video
 
- - `video_clipimage.py`: 주어진 이미지에서 얼굴을 감지하고, 감지된 얼굴 영역을 사각형으로 표시한 후 해당 얼굴을 256x256 크기로 조정하여 저장하는 작업을 수행합니다.
+ - `video_clipimage.py`: 주어진 이미지에서 얼굴을 감지하고, 감지된 얼굴 영역을 사각형으로 표시한 후 해당 얼굴을 256x256 크기로 조정하여 저장하는 스크립트입니다.
  - `video_download.py`: 주요 기능은 주어진 YouTube 비디오 링크에서 비디오를 다운로드하고, 다운로드한 비디오를 mp4 또는 mp3 형식으로 변환하는 스크립트입니다.
 
 #### total
