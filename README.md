@@ -108,7 +108,7 @@ code
 ## Getting Started
 
   
-### Setting up Virtual Enviornment
+### Setting up Virtual Environment
 
   
 1. Initialize and update the server
@@ -153,7 +153,7 @@ deactivate
 
   
 
-To Install the necessary packages liksted in `requirements.txt`, run the following command while your virtual environment is activated:
+To Install the necessary packages listed in `requirements.txt`, run the following command while your virtual environment is activated:
 
 ```
 
