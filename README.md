@@ -167,6 +167,3 @@ pip install -r requirements.txt
   
 ## Links
 - [Naver BoostCamp 6th github](https://github.com/boostcampaitech6/level2-3-cv-finalproject-cv-08)
-- [HQ-Voxceleb](https://github.com/BAI-Yeqi/HQ-VoxCeleb?tab=readme-ov-file)
-- [OLKAVS](https://github.com/IIP-Sogang/olkavs-avspeech)
-- [딥페이크 변조 영상](https://www.aihub.or.kr/aihubdata/data/view.do?currMenu=115&topMenu=100&aihubDataSe=data&dataSetSn=55)
