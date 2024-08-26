@@ -166,10 +166,3 @@ code/audio/data
 nohup.out
 temp.ipynb
 *.csv
-<<<<<<< HEAD
-
-=======
->>>>>>> a443338 (Chore : Fix gitignore and delete files)
-=======
-*.csv
->>>>>>> 0c8d4b7 (Chore : Fix gitignore and delete files)
