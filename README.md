@@ -53,6 +53,13 @@ code
 ┗ Dockerfile
 ...
 ```
+## Dataset 
+모델 학습에 사용된 데이터셋은 다음과 같습니다. 
+ - HQ-Voxceleb
+ <br>[paper](https://arxiv.org/abs/2006.05888), [github](https://github.com/BAI-Yeqi/HQ-VoxCeleb)
+ - OLKAVS
+ <br>[paper](https://ieeexplore.ieee.org/document/10446901), [github](https://github.com/IIP-Sogang/olkavs-avspeech?tab=readme-ov-file)
+
 ## Usage
 
   
