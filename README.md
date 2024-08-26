@@ -25,6 +25,11 @@ code
 ┃ ┣ crawling_select_csv.py
 ┃ ┣ crawling_urlsave.py
 ┃ ┗ crawling_videosave.py
+┣ EDA
+┃ ┣ EDA_deepfake.ipynb
+┃ ┣ EDA_HQvoxceleb.ipynb
+┃ ┣ EDA_OLKAVS.ipynb
+┃ ┗ EDA_survey.ipynb
 ┣ image
 ┃ ┣ image_clipseg2.py
 ┃ ┗ image_face_frame.py
@@ -66,6 +71,12 @@ code
  - `crawling_urlsave.py`: Selenium을 사용하여 YouTube 크롤링을 수행하여 약 162개의 비디오에 대한 이름, 제목 및 URL 정보를 Youtube_search_df.csv에 저장하는 스크립트입니다.
  - `crawling_videosave.py`: '`crawling_urlsave.py`'를 통해 얻은 URL에서 비디오를 다운로드하는 스크립트입니다. 비디오는 'download' 폴더에 저장됩니다.
 
+#### EDA 
+ - `EDA_deepfake.ipynb`: '딥페이크 변조 영상' 데이터셋 metadata를 통한 EDA 스크립트입니다.
+ - `EDA_HQvoxceleb.ipynb`: 'HQ-Voxceleb' 데이터셋 metadata를 통한 EDA 스크립트입니다.
+ - `EDA_OLKAVS.ipynb`: 'OLKAVS' 데이터셋 metadata, voice를 통한 EDA 스크립트입니다.
+ - `EDA_survey.ipynb`: 서비스 이용자를 대상으로 진행한 설문조사 EDA 스크립트입니다.
+
 #### image
 
  - `image_clipseg2.py`: CLIPSeg 모델을 사용하여 텍스트 프롬프트를 기반으로 이미지 세분화를 수행하는 스크립트입니다. 이미지를 불러와 텍스트 프롬프트로 처리하고, 식별된 객체를 기반으로 세분화된 이미지를 생성합니다.
@@ -97,7 +108,7 @@ code
 ## Getting Started
 
   
-### Setting up Virtual Enviornment
+### Setting up Virtual Environment
 
   
 1. Initialize and update the server
@@ -142,7 +153,7 @@ deactivate
 
   
 
-To Install the necessary packages liksted in `requirements.txt`, run the following command while your virtual environment is activated:
+To Install the necessary packages listed in `requirements.txt`, run the following command while your virtual environment is activated:
 
 ```
 
